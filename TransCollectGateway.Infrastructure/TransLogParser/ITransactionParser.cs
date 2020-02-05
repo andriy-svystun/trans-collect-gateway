@@ -12,6 +12,6 @@ namespace TransCollectGateway.Infrastructure
     {
         string GetSupportedFileType();
         IEnumerable<string> GetTRansactions(System.IO.Stream transData);
-        Transaction PasreTransaction(string transactionLine);
+        Transaction ParseTransaction(string transactionLine);
     }
 }

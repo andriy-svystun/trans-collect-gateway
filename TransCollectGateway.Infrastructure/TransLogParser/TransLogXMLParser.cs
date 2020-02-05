@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TransCollectGateway.Common;
 
-namespace TransCollectGateway.Infrastructure.TransLogParser
+namespace TransCollectGateway.Infrastructure
 {
     public class TransLogXMLParser : ITransactionParser
     {
@@ -20,7 +20,7 @@ namespace TransCollectGateway.Infrastructure.TransLogParser
             throw new NotImplementedException();
         }
 
-        public Transaction PasreTransaction(string transactionData)
+        public Transaction ParseTransaction(string transactionData)
         {
             throw new NotImplementedException();
         }

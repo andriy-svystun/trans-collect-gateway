@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="TransLogParser\ITransLogFileProcessing.cs" />
     <Compile Include="TransLogParser\ITransactionParser.cs" />
-    <Compile Include="TransLogParser\TransLogCVSParser.cs" />
+    <Compile Include="TransLogParser\TransLogCSVParser.cs" />
     <Compile Include="TransLogParser\TransLogXMLParser.cs" />
     <Compile Include="TransLogUploadService\TransLogUploadService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
