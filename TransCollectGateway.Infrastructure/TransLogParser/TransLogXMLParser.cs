@@ -15,7 +15,7 @@ namespace TransCollectGateway.Infrastructure
             return "XML";
         }
 
-        public IEnumerable<string> GetTRansactions(Stream transData)
+        public IEnumerable<string> GetTransactions(Stream transData)
         {
             throw new NotImplementedException();
         }

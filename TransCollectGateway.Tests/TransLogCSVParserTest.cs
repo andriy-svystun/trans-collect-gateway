@@ -41,7 +41,7 @@ namespace TransCollectGateway.Tests
 
             var cvsFile = GetCSVFileStreeam(csvString1);
 
-            IEnumerable<string> res = testpasrer.GetTRansactions(cvsFile);
+            IEnumerable<string> res = testpasrer.GetTransactions(cvsFile);
 
             Assert.IsNotNull(res);
 
@@ -59,7 +59,7 @@ namespace TransCollectGateway.Tests
 
             var cvsFile = GetCSVFileStreeam(buf.ToString());
 
-            IEnumerable<string> res = testpasrer.GetTRansactions(cvsFile);
+            IEnumerable<string> res = testpasrer.GetTransactions(cvsFile);
 
             Assert.IsNotNull(res);
 

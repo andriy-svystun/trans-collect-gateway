@@ -11,7 +11,7 @@ namespace TransCollectGateway.Infrastructure
     public interface ITransactionParser
     {
         string GetSupportedFileType();
-        IEnumerable<string> GetTRansactions(System.IO.Stream transData);
+        IEnumerable<string> GetTransactions(System.IO.Stream transData);
         Transaction ParseTransaction(string transactionLine);
     }
 }

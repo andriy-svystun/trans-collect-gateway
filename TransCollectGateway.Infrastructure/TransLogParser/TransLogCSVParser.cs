@@ -15,11 +15,23 @@ namespace TransCollectGateway.Infrastructure
             return "CSV";
         }
 
-        public IEnumerable<string> GetTRansactions(Stream transData)
+        public IEnumerable<string> GetTransactions(Stream transData)
         {
-            IEnumerable<string> res = new List<string>();
+            if (transData == null)
+                throw new ArgumentNullException(nameof(transData));
 
-            throw new NotImplementedException();
+            var res = new List<string>();
+
+            using (var reader = new StreamReader(transData))
+            {
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    res.Add(line);
+                }
+            }
+
+            return res;
         }
 
         public Transaction ParseTransaction(string transactionData)
