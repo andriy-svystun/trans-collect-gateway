@@ -12,7 +12,7 @@ namespace TransCollectGateway.Tests
     [TestClass]
     public class TransLogCSVParserTest
     {
-        private const string  csvString1 = @"Invoice0000001”,”1,000.00”, “USD”, “20/02/2019 12:33:16”, “Approved";
+        private const string  csvString1 = @"""Invoice0000001"",""1,000.00"", ""USD"", ""20/02/2019 12:33:16"", ""Approved""";
         private const string  csvString2 = @"Invoice0000002”,”300.00”,”USD”,”21/02/2019 02:04:59”, “Failed";
 
         private Stream GetCSVFileStreeam(string content)
@@ -72,9 +72,7 @@ namespace TransCollectGateway.Tests
         {
             TransLogCSVParser testpasrer = new TransLogCSVParser();
 
-            var res = testpasrer.ParseTransaction(csvString1);
-
-            Assert.IsNotNull(res);
+            Assert.ThrowsException<ArgumentNullException>( () => testpasrer.ParseTransaction(null), "ParseTransaction() - ArgumentNullException");
         }
 
         [TestMethod]
