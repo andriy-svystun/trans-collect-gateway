@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TransLogParser\ITransLogFileProcessing.cs" />
+    <Compile Include="TransLogFileProcessing\ITransLogFileProcessing.cs" />
     <Compile Include="TransLogParser\ITransactionParser.cs" />
     <Compile Include="TransLogParser\TransLogCSVParser.cs" />
     <Compile Include="TransLogParser\TransLogXMLParser.cs" />

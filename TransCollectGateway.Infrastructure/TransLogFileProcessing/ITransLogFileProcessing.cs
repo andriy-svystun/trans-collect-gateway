@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TransCollectGateway.Common;
 
-namespace TransCollectGateway.Infrastructure.TransLogParser
+namespace TransCollectGateway.Infrastructure
 {
     public interface ITransLogFileProcessing
     {
