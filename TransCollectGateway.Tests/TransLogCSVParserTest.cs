@@ -76,6 +76,14 @@ namespace TransCollectGateway.Tests
         }
 
         [TestMethod]
+        public void ParseTransactionBadFormatExpeptionTest()
+        {
+            TransLogCSVParser testpasrer = new TransLogCSVParser();
+
+            Assert.ThrowsException<TCGException>(() => testpasrer.ParseTransaction("..."), "ParseTransaction() - TCGException");
+        }
+
+        [TestMethod]
         public void ParseTransactionTransactionIdTest()
         {
             TransLogCSVParser testpasrer = new TransLogCSVParser();

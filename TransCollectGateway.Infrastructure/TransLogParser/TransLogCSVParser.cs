@@ -47,7 +47,7 @@ namespace TransCollectGateway.Infrastructure
             var values = regex.Split(transactionData);
 
             if (values.Length < 5)
-                throw new ArgumentException(nameof(transactionData));
+                throw new TCGException("Bad file format");
 
             for (int i =0; i< values.Length; i++)
             {
@@ -76,7 +76,7 @@ namespace TransCollectGateway.Infrastructure
                 case "Finished": result.Status = TransStatus.Done;
                     break;
 
-                default: throw new ArgumentException(nameof(transactionData));
+                default: throw new TCGException("Bad file format");
             }
 
             return result;
