@@ -66,6 +66,7 @@
     <Compile Include="TransLogCSVParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransLogFileProcessingTests.cs" />
+    <Compile Include="TransLogUploadServiceTests.cs" />
     <Compile Include="TransLogXMLParserTest.cs" />
   </ItemGroup>
   <ItemGroup>
