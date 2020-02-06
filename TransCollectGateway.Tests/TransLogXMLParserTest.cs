@@ -15,7 +15,7 @@ namespace TransCollectGateway.Tests
     public class TransLogXMLParserTest
     {
         private const string xmlFileContent = @"<Transactions>
-                    <Transaction id=”Inv00001”>
+                    <Transaction id=""Inv00001"">
                         <TransactionDate>2019-01-23T13:45:10</TransactionDate>
                         <PaymentDetails>
                         <Amount>200.00</Amount>
@@ -26,7 +26,7 @@ namespace TransCollectGateway.Tests
                 </Transactions>";
 
 
-        private const string xmlTransaction = @"<Transaction id=”Inv00001”>
+        private const string xmlTransaction = @"<Transaction id=""Inv00001"">
                         <TransactionDate>2019-01-23T13:45:10</TransactionDate>
                         <PaymentDetails>
                         <Amount>200.00</Amount>
@@ -58,7 +58,7 @@ namespace TransCollectGateway.Tests
         }
 
         [TestMethod]
-        public void GetTransactionsCount1Test()
+        public void GetXMLTransactionsCount1Test()
         {
             TransLogXMLParser testpasrer = new TransLogXMLParser();
 
@@ -84,7 +84,7 @@ namespace TransCollectGateway.Tests
         {
             TransLogXMLParser testpasrer = new TransLogXMLParser();
 
-            Assert.ThrowsException<TCGException>(() => testpasrer.ParseTransaction("..."), "ParseTransaction() - TCGException");
+            Assert.ThrowsException<TCGException>(() => testpasrer.ParseTransaction("<Transactions></Transactions>"), "ParseTransaction() - TCGException");
         }
 
         [TestMethod]
@@ -121,21 +121,21 @@ namespace TransCollectGateway.Tests
         [TestMethod]
         public void ParseTransactionDateTest()
         {
-            TransLogCSVParser testpasrer = new TransLogCSVParser();
+            TransLogXMLParser testpasrer = new TransLogXMLParser();
 
             var res = testpasrer.ParseTransaction(xmlTransaction).TransDate;
 
-            Assert.AreEqual(new DateTime(2019, 01, 23, 13, 45, 10, DateTimeKind.Local), res);
+            Assert.AreEqual(new DateTime(2019, 01, 23, 13, 45, 10, DateTimeKind.Utc), res);
         }
 
         [TestMethod]
         public void ParseTransactionStatusTest()
         {
-            TransLogCSVParser testpasrer = new TransLogCSVParser();
+            TransLogXMLParser testpasrer = new TransLogXMLParser();
 
             var res = testpasrer.ParseTransaction(xmlTransaction).Status;
 
-            Assert.AreEqual(TransStatus.Approved, res);
+            Assert.AreEqual(TransStatus.Done, res);
         }
 
     }

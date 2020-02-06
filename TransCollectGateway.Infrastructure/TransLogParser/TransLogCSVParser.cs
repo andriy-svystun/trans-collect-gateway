@@ -59,11 +59,7 @@ namespace TransCollectGateway.Infrastructure
 
             result.TransactionId = values[0];
 
-            var format = new CultureInfo(CultureInfo.InvariantCulture.LCID);
-            format.NumberFormat.NumberDecimalSeparator = ".";
-            format.NumberFormat.NumberGroupSeparator = ",";
-            NumberStyles numStyle = NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands;
-            result.Amount = decimal.Parse(values[1], numStyle, format);
+            result.Amount = Transaction.ParseDecimal(values[1]);
             
             result.CurrencyCode =  values[2];
             result.TransDate = DateTime.Parse(values[3]);
