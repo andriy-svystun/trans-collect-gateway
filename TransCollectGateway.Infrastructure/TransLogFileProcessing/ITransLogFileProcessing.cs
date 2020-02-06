@@ -10,6 +10,6 @@ namespace TransCollectGateway.Infrastructure
     public interface ITransLogFileProcessing
     {
         void SetParser(ITransactionParser parser);
-        IEnumerable<Transaction> ProcessTansactionFile(System.IO.Stream fileStream);
+        IEnumerable<Transaction> ProcessTransactionFile(System.IO.Stream fileStream);
     }
 }

@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TransLogFileProcessing\ITransLogFileProcessing.cs" />
+    <Compile Include="TransLogFileProcessing\TransLogFileProcessing.cs" />
     <Compile Include="TransLogParser\ITransactionParser.cs" />
     <Compile Include="TransLogParser\TransLogCSVParser.cs" />
     <Compile Include="TransLogParser\TransLogXMLParser.cs" />
