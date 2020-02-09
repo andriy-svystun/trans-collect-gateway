@@ -40,6 +40,8 @@ namespace TransCollectGateway.Infrastructure
             {
                 _repository.Create(trans);
             }
+
+            _repository.SaveChanges();
         }
     }
 }
