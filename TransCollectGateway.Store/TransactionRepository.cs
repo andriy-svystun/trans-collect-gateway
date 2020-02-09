@@ -12,9 +12,9 @@ namespace TransCollectGateway.Store
     {
         private readonly EFDBContext _dbContext;
 
-        public TransactionRepository(EFDBContext dbContext)
+        public TransactionRepository()
         {
-            _dbContext = dbContext;
+            _dbContext = new EFDBContext();
         }
 
         public void Create(Transaction item)
