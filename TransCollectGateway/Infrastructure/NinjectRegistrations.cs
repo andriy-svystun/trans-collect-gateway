@@ -7,7 +7,7 @@ using TransCollectGateway.Common;
 using TransCollectGateway.Store;
 using TransCollectGateway.Infrastructure;
 
-namespace TransCollectGateway.Infrastructure
+namespace TransCollectGateway
 {
     public class NinjectRegistrations : NinjectModule
     {
