@@ -58,13 +58,13 @@ namespace TransCollectGateway.Tests
         }
 
         [TestMethod]
-        public void GetXMLTransactionsCount1Test()
+        public async void GetXMLTransactionsCount1Test()
         {
             TransLogXMLParser testpasrer = new TransLogXMLParser();
 
             var xmlFile = GetXMLFileStream(xmlFileContent);
 
-            IEnumerable<string> res = testpasrer.GetTransactions(xmlFile);
+            IEnumerable<string> res = await testpasrer.GetTransactions(xmlFile);
 
             Assert.IsNotNull(res);
 

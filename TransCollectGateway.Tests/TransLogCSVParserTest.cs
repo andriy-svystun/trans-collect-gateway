@@ -35,13 +35,13 @@ namespace TransCollectGateway.Tests
         }
 
         [TestMethod]
-        public void GetTransactionsCount1Test()
+        public async void GetTransactionsCount1Test()
         {
             TransLogCSVParser testpasrer = new TransLogCSVParser();
 
             var cvsFile = GetCSVFileStreeam(csvString1);
 
-            IEnumerable<string> res = testpasrer.GetTransactions(cvsFile);
+            IEnumerable<string> res = await testpasrer.GetTransactions(cvsFile);
 
             Assert.IsNotNull(res);
 
@@ -49,7 +49,7 @@ namespace TransCollectGateway.Tests
         }
 
         [TestMethod]
-        public void GetTransactionsCount2Test()
+        public async void GetTransactionsCount2Test()
         {
             TransLogCSVParser testpasrer = new TransLogCSVParser();
 
@@ -59,7 +59,7 @@ namespace TransCollectGateway.Tests
 
             var cvsFile = GetCSVFileStreeam(buf.ToString());
 
-            IEnumerable<string> res = testpasrer.GetTransactions(cvsFile);
+            IEnumerable<string> res =  await testpasrer.GetTransactions(cvsFile);
 
             Assert.IsNotNull(res);
 

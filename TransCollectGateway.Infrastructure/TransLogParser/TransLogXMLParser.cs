@@ -16,7 +16,7 @@ namespace TransCollectGateway.Infrastructure
             return "XML";
         }
 
-        public IEnumerable<string> GetTransactions(Stream transData)
+        public async Task<IEnumerable<string>> GetTransactions(Stream transData)
         {
             if (transData == null)
                 throw new ArgumentNullException(nameof(transData));
@@ -24,7 +24,7 @@ namespace TransCollectGateway.Infrastructure
             var res = new List<string>();
 
             XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load(transData);
+            await Task.Run(() => xmlDoc.Load(transData));
 
             var xRoot = xmlDoc.SelectNodes("//Transactions/Transaction") ?? throw new TCGException("Bad file format");
 

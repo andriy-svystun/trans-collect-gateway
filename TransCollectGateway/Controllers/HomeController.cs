@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using TransCollectGateway.Common;
@@ -24,7 +25,7 @@ namespace TransCollectGateway.Controllers
         }
 
         [HttpPost]
-        public ActionResult UploadFile(HttpPostedFileBase file)
+        public async Task<ActionResult> UploadFile(HttpPostedFileBase file)
         {
             try
             {
@@ -52,7 +53,7 @@ namespace TransCollectGateway.Controllers
                             }
                     }
 
-                    _uploadService.UploadTransLog(file.InputStream, transFileFormat);
+                    await _uploadService.UploadTransLog(file.InputStream, transFileFormat);
                     ViewBag.Message = "File Uploaded Successfully!!";
                 }
 

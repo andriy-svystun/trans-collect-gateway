@@ -12,7 +12,7 @@ namespace TransCollectGateway.Infrastructure
     {
         private ITransactionParser _transactionParser;
 
-        public IEnumerable<Transaction> ProcessTransactionFile(Stream fileStream)
+        public async Task<IEnumerable<Transaction>> ProcessTransactionFile(Stream fileStream)
         {
             if (_transactionParser == null)
                 throw new ApplicationException("Setup parser first");
@@ -21,7 +21,7 @@ namespace TransCollectGateway.Infrastructure
 
             try
             {
-                var transactions = _transactionParser.GetTransactions(fileStream);
+                var transactions = await _transactionParser.GetTransactions(fileStream);
 
                 foreach (var trans in transactions)
                 {

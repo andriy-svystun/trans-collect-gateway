@@ -16,18 +16,18 @@ namespace TransCollectGateway.Tests
     public class TransLogFileProcessingTests
     {
         [TestMethod]
-        public void ProcessTransactionFileTest()
+        public async void ProcessTransactionFileTest()
         {
             var transData = "transData";
             var transaction = new Transaction() { TransactionId = transData };
 
             var mock = new Mock<ITransactionParser>();
-            mock.Setup(a => a.GetTransactions(It.IsAny<Stream>())).Returns(new string[] { transData });
+            mock.Setup(a => a.GetTransactions(It.IsAny<Stream>())).ReturnsAsync(new string[] { transData });
             mock.Setup(a => a.ParseTransaction(It.IsAny<string>())).Returns(transaction);
 
             var processor = new TransLogFileProcessing();
             processor.SetParser(mock.Object);
-            var result = processor.ProcessTransactionFile(new MemoryStream());
+            var result = await processor.ProcessTransactionFile(new MemoryStream());
 
             mock.Verify(a => a.GetTransactions(It.IsAny<Stream>()), Times.Once);
             mock.Verify(a => a.ParseTransaction(It.IsAny<string>()), Times.AtLeastOnce);

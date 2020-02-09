@@ -23,14 +23,14 @@ namespace TransCollectGateway.Tests
         {
             _transaction = new Transaction() { TransactionId = "TransId001" };
             _fileProcessingMock = new Mock<ITransLogFileProcessing>();
-            _fileProcessingMock.Setup(a => a.ProcessTransactionFile(It.IsAny<Stream>())).Returns(new List<Transaction>() { _transaction } );
+            _fileProcessingMock.Setup(a => a.ProcessTransactionFile(It.IsAny<Stream>())).ReturnsAsync(new List<Transaction>() { _transaction } );
 
             _reposMock = new Mock<IRepository<Transaction>>();
             _reposMock.Setup(a => a.Create(It.IsAny<Transaction>()));
         }
 
         [TestMethod]
-        public void UploadTransLogCVSTest()
+        public async void UploadTransLogCVSTest()
         {
             _fileProcessingMock.Setup(a => a.SetParser(It.IsAny<TransLogCSVParser>()));
 
@@ -38,7 +38,7 @@ namespace TransCollectGateway.Tests
 
             var data = new MemoryStream();
 
-            _uploadService.UploadTransLog(data, TransFileFormat.CSV);
+            await _uploadService.UploadTransLog(data, TransFileFormat.CSV);
 
             _fileProcessingMock.Verify(f => f.SetParser(It.IsAny<TransLogCSVParser>()), Times.Once);
             _fileProcessingMock.Verify(f => f.ProcessTransactionFile(It.Is<MemoryStream>( s => (s == data))), Times.Once);

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace TransCollectGateway.Common
 {
     public interface ITransLogUploadService
     {
-        void UploadTransLog(System.IO.Stream fileData, TransFileFormat format);
+        Task UploadTransLog(System.IO.Stream fileData, TransFileFormat format);
     }
 }

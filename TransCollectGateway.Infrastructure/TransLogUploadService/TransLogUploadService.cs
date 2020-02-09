@@ -19,7 +19,7 @@ namespace TransCollectGateway.Infrastructure
             _repository = repository;
         }
 
-        public void UploadTransLog(Stream fileData, TransFileFormat format)
+        public async Task UploadTransLog(Stream fileData, TransFileFormat format)
         {
             if (fileData == null)
                 throw new ArgumentNullException(nameof(fileData));
@@ -34,14 +34,14 @@ namespace TransCollectGateway.Infrastructure
                     break;
             }
 
-            var result = _fileProcessing.ProcessTransactionFile(fileData) ?? throw new TCGException("Error parsing transaction file");
+            var result = await _fileProcessing.ProcessTransactionFile(fileData) ?? throw new TCGException("Error parsing transaction file");
 
             foreach(var trans in result)
             {
                 _repository.Create(trans);
             }
 
-            _repository.SaveChanges();
+            await _repository.SaveChangesAsync();
         }
     }
 }

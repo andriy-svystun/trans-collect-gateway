@@ -17,7 +17,7 @@ namespace TransCollectGateway.Infrastructure
             return "CSV";
         }
 
-        public IEnumerable<string> GetTransactions(Stream transData)
+        public async Task<IEnumerable<string>> GetTransactions(Stream transData)
         {
             if (transData == null)
                 throw new ArgumentNullException(nameof(transData));
@@ -28,7 +28,7 @@ namespace TransCollectGateway.Infrastructure
             {
                 while (!reader.EndOfStream)
                 {
-                    var line = reader.ReadLine();
+                    var line = await reader.ReadLineAsync();
                     res.Add(line);
                 }
             }
