@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -21,5 +22,53 @@ namespace TransCollectGateway.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult UploadFile(HttpPostedFileBase file)
+        {
+            try
+            {
+                if (file.ContentLength > 0)
+                {
+                    if (file.ContentLength > 1048576)
+                    {
+                        ViewBag.Message = "File too long!";
+                        return View("Index");
+                    }
+
+                    string fileEx = Path.GetExtension(file.FileName);
+                    TransFileFormat transFileFormat;
+
+                    switch (fileEx)
+                    {
+                        case "CSV" : transFileFormat = TransFileFormat.CSV;
+                            break;
+                        case "XML" : transFileFormat = TransFileFormat.XML;
+                            break;
+                        default:
+                            {
+                                ViewBag.Message = "Unknown format";
+                                return View("Index");
+                            }
+                    }
+
+                    _uploadService.UploadTransLog(file.InputStream, transFileFormat);
+                    ViewBag.Message = "File Uploaded Successfully!!";
+                }
+
+                
+                return View("Index");
+            }
+            catch (TCGException ex)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest, ex.Message);
+            }
+            catch
+            {
+                ViewBag.Message = "File upload failed!!";
+                return View("Index");
+            }
+        }
+
     }
 }
