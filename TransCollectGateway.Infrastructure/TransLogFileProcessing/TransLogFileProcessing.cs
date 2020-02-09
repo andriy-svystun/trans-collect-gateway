@@ -19,11 +19,22 @@ namespace TransCollectGateway.Infrastructure
 
             var result = new List<Transaction>();
 
-            var transactions = _transactionParser.GetTransactions(fileStream);
-
-            foreach(var trans in transactions)
+            try
             {
-                result.Add(_transactionParser.ParseTransaction(trans));
+                var transactions = _transactionParser.GetTransactions(fileStream);
+
+                foreach (var trans in transactions)
+                {
+                    result.Add(_transactionParser.ParseTransaction(trans));
+                }
+            }
+            catch (TCGException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw new TCGException($"Bad file format! {ex.Message}");
             }
 
             return result;
