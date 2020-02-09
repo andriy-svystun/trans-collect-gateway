@@ -32,22 +32,22 @@ namespace TransCollectGateway.Controllers
                 {
                     if (file.ContentLength > 1048576)
                     {
-                        ViewBag.Message = "File too long!";
+                        ViewData["Error"] = "File too long!";
                         return View("Index");
                     }
 
-                    string fileEx = Path.GetExtension(file.FileName);
+                    string fileEx = Path.GetExtension(file.FileName).ToUpper();
                     TransFileFormat transFileFormat;
 
                     switch (fileEx)
                     {
-                        case "CSV" : transFileFormat = TransFileFormat.CSV;
+                        case ".CSV" : transFileFormat = TransFileFormat.CSV;
                             break;
-                        case "XML" : transFileFormat = TransFileFormat.XML;
+                        case ".XML" : transFileFormat = TransFileFormat.XML;
                             break;
                         default:
                             {
-                                ViewBag.Message = "Unknown format";
+                                ViewData["Error"] = "Unknown format";
                                 return View("Index");
                             }
                     }
@@ -65,7 +65,7 @@ namespace TransCollectGateway.Controllers
             }
             catch
             {
-                ViewBag.Message = "File upload failed!!";
+                ViewData["Error"] = "File upload failed!";
                 return View("Index");
             }
         }
