@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransCollectGateway.Store",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransCollectGateway", "TransCollectGateway\TransCollectGateway.csproj", "{DE2E0E7D-C3D9-4698-89BA-031ABE5710EC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransCollectGateway.API", "TransCollectGateway.API\TransCollectGateway.API.csproj", "{350785EC-69BA-4CBD-95BE-E38675AEA85D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{DE2E0E7D-C3D9-4698-89BA-031ABE5710EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE2E0E7D-C3D9-4698-89BA-031ABE5710EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE2E0E7D-C3D9-4698-89BA-031ABE5710EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{350785EC-69BA-4CBD-95BE-E38675AEA85D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{350785EC-69BA-4CBD-95BE-E38675AEA85D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{350785EC-69BA-4CBD-95BE-E38675AEA85D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{350785EC-69BA-4CBD-95BE-E38675AEA85D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -10,6 +10,7 @@ using System.Web.Http;
 using Ninject;
 using Ninject.Modules;
 using Ninject.Web.Mvc;
+using Ninject.Web.WebApi;
 
 namespace TransCollectGateway
 {
@@ -24,7 +25,8 @@ namespace TransCollectGateway
 
             NinjectModule registrations = new NinjectRegistrations();
             var kernel = new StandardKernel(registrations);
-            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
+            DependencyResolver.SetResolver(new Ninject.Web.Mvc.NinjectDependencyResolver(kernel));
+            
         }
     }
 }
