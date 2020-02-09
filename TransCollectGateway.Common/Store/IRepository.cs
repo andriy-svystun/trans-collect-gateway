@@ -12,9 +12,10 @@ namespace TransCollectGateway.Common
         T Get(int id);
         Task<T> GetAsync(int id);
         IEnumerable<T> Get(Func<T, bool> predicate);
-        IEnumerable<T> GetAsync(Func<T, bool> predicate);
         void Create(T item);
         void Update(T item);
         void Delete(int id);
+        int SaveChanges();
+        Task<int> SaveChangesAsync();
     }
 }
