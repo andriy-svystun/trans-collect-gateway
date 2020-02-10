@@ -31,10 +31,13 @@ namespace TransCollectGateway.API.Controllers
             return Json<IEnumerable<TransactionModel>>(result);
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
+        [HttpGet]
+        // GET api/<controller>?currency
+        public JsonResult<IEnumerable<TransactionModel>> Get([FromUri] string currency)
         {
-            return "value";
+            var result = _mapper.Map<IEnumerable<Transaction>, IEnumerable<TransactionModel>>(_repository.Get(q => q.CurrencyCode.Equals(currency.ToUpper())));
+
+            return Json<IEnumerable<TransactionModel>>(result);
         }
 
         // POST api/<controller>

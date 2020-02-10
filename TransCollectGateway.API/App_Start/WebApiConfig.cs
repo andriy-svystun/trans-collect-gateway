@@ -15,6 +15,11 @@ namespace TransCollectGateway.API
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
+                name: "TransactionApi",
+                routeTemplate: "api/{controller}/{currency}"
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
