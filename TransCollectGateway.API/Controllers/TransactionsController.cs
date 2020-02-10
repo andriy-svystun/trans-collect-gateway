@@ -40,6 +40,14 @@ namespace TransCollectGateway.API.Controllers
             return Json<IEnumerable<TransactionModel>>(result);
         }
 
+        [HttpGet]
+        public JsonResult<IEnumerable<TransactionModel>> GetByStatus([FromUri] string status)
+        {
+            var result = _mapper.Map<IEnumerable<Transaction>, IEnumerable<TransactionModel>>(_repository.Get(q => q.Status == (TransStatus) Enum.Parse(typeof(TransStatus), status) ));
+
+            return Json<IEnumerable<TransactionModel>>(result);
+        }
+
         // POST api/<controller>
         public void Post([FromBody]string value)
         {

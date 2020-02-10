@@ -20,6 +20,12 @@ namespace TransCollectGateway.API
             );
 
             config.Routes.MapHttpRoute(
+                name: "TransactionApiGetByStatus",
+                routeTemplate: "api/{controller}/{status}"
+            );
+
+
+            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }

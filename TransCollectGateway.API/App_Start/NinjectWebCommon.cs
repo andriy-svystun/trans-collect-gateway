@@ -99,14 +99,7 @@ namespace TransCollectGateway.API.App_Start
     {
         public string Convert(TransStatus source, ResolutionContext context)
         {
-            switch (source)
-            {
-                case TransStatus.Approved: return "A";
-                case TransStatus.Rejected: return "R";
-                case TransStatus.Done:     return "D";
-                default:
-                    return "";
-            }
+            return TransactionModel.GetStatusCodeMapping(source);
         }
             
     }
