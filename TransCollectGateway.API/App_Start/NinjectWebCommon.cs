@@ -4,8 +4,10 @@
 namespace TransCollectGateway.API.App_Start
 {
     using System;
+    using System.Reflection;
     using System.Web;
     using System.Web.Http;
+    using AutoMapper;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
     using Ninject;
@@ -14,6 +16,7 @@ namespace TransCollectGateway.API.App_Start
     using Ninject.Web.WebApi;
     using TransCollectGateway.Common;
     using TransCollectGateway.Store;
+    using TransCollectGateway.API;
 
     public static class NinjectWebCommon 
     {
@@ -49,6 +52,11 @@ namespace TransCollectGateway.API.App_Start
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
+                var mapperConfiguration = CreateConfiguration();
+                kernel.Bind<MapperConfiguration>().ToConstant(mapperConfiguration).InSingletonScope();
+                kernel.Bind<IMapper>().ToMethod(ctx =>
+                            new Mapper(mapperConfiguration, type => ctx.Kernel.Get(type)));
+
                 RegisterServices(kernel);
                 return kernel;
             }
@@ -67,5 +75,39 @@ namespace TransCollectGateway.API.App_Start
         {
             kernel.Bind<IRepository<Transaction>>().To<TransactionRepository>();
         }
+
+        private static MapperConfiguration CreateConfiguration()
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Transaction, TransactionModel>()
+                    .ForMember("Id", scr => scr.MapFrom(c => c.Id))
+                    .ForMember("Payment", dest => dest.MapFrom(c => string.Concat(c.Amount, " ", c.CurrencyCode)))
+                    .ForMember("Status", dest => dest.ConvertUsing<TransStatus>(new StatusFormatter(), "Status"));
+                
+                cfg.AddMaps(Assembly.GetExecutingAssembly().GetType().Assembly);
+
+            });
+
+            config.AssertConfigurationIsValid();
+
+            return config;
+        }
+    }
+
+    public class StatusFormatter : IValueConverter<TransStatus, string>
+    {
+        public string Convert(TransStatus source, ResolutionContext context)
+        {
+            switch (source)
+            {
+                case TransStatus.Approved: return "A";
+                case TransStatus.Rejected: return "R";
+                case TransStatus.Done:     return "D";
+                default:
+                    return "";
+            }
+        }
+            
     }
 }
