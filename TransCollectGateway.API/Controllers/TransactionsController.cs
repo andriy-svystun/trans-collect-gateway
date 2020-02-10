@@ -11,6 +11,7 @@ using AutoMapper;
 
 namespace TransCollectGateway.API.Controllers
 {
+    [RoutePrefix("api/transactions")]
     public class TransactionsController : ApiController
     {
         private readonly IRepository<Transaction> _repository;
@@ -22,6 +23,7 @@ namespace TransCollectGateway.API.Controllers
             _mapper = mapper;
         }
 
+        [Route("")]
         // GET api/<controller>
         public async Task<JsonResult<IEnumerable<TransactionModel>>> Get()
         {
@@ -32,6 +34,7 @@ namespace TransCollectGateway.API.Controllers
         }
 
         [HttpGet]
+        [Route("currency/{currency}")]
         // GET api/<controller>?currency
         public JsonResult<IEnumerable<TransactionModel>> Get([FromUri] string currency)
         {
@@ -41,6 +44,7 @@ namespace TransCollectGateway.API.Controllers
         }
 
         [HttpGet]
+        [Route("status/{status}")]
         public JsonResult<IEnumerable<TransactionModel>> GetByStatus([FromUri] string status)
         {
             var result = _mapper.Map<IEnumerable<Transaction>, IEnumerable<TransactionModel>>(_repository.Get(q => q.Status == (TransStatus) Enum.Parse(typeof(TransStatus), status) ));
@@ -49,6 +53,7 @@ namespace TransCollectGateway.API.Controllers
         }
 
         [HttpGet]
+        [Route("range/{date1:datetime}/{date2:datetime}")]
         public JsonResult<IEnumerable<TransactionModel>> GetByDateRange([FromUri] DateTime date1, [FromUri] DateTime date2)
         {
             var result = _mapper.Map<IEnumerable<Transaction>, IEnumerable<TransactionModel>>(_repository.Get(q => q.TransDate >= date1 && q.TransDate <= date2));

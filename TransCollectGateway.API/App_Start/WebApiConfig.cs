@@ -14,26 +14,7 @@ namespace TransCollectGateway.API
             // Web API routes
             config.MapHttpAttributeRoutes();
 
-            config.Routes.MapHttpRoute(
-                name: "TransactionApi",
-                routeTemplate: "api/{controller}/{currency}"
-            );
-
-            config.Routes.MapHttpRoute(
-                name: "TransactionApiGetByStatus",
-                routeTemplate: "api/{controller}/{status}"
-            );
-
-            config.Routes.MapHttpRoute(
-                name: "TransactionApiGetByDate",
-                routeTemplate: "api/{controller}/{date1}/{date2}"
-            );
-
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
+            
         }
     }
 }
