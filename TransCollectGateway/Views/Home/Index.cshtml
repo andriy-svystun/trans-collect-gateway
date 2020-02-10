@@ -1,0 +1,31 @@
+﻿@{
+	ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+	<p class="lead">Here you can upload file with transactions. Supported formats are : CSV, XML. File size is max 1 MB.</p>
+</div>
+
+@if (ViewData["Error"] != null)
+{
+	<div class="alert alert-danger" role="alert">
+		@ViewData["Error"]
+	</div>
+}
+
+<div class="row">
+	@using (Html.BeginForm("UploadFile", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+	{
+
+		<div>
+			@Html.TextBox("file", "", new { type = "file" }) <br />
+
+			<input type="submit" value="Upload" />
+
+			<p>@ViewBag.Message</p>
+
+		</div>
+
+
+	}
+</div>
