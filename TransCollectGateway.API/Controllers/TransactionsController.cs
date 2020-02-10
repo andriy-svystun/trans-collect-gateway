@@ -48,19 +48,13 @@ namespace TransCollectGateway.API.Controllers
             return Json<IEnumerable<TransactionModel>>(result);
         }
 
-        // POST api/<controller>
-        public void Post([FromBody]string value)
+        [HttpGet]
+        public JsonResult<IEnumerable<TransactionModel>> GetByDateRange([FromUri] DateTime date1, [FromUri] DateTime date2)
         {
+            var result = _mapper.Map<IEnumerable<Transaction>, IEnumerable<TransactionModel>>(_repository.Get(q => q.TransDate >= date1 && q.TransDate <= date2));
+
+            return Json<IEnumerable<TransactionModel>>(result);
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
     }
 }

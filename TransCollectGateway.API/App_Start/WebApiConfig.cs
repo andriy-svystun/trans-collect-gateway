@@ -24,6 +24,10 @@ namespace TransCollectGateway.API
                 routeTemplate: "api/{controller}/{status}"
             );
 
+            config.Routes.MapHttpRoute(
+                name: "TransactionApiGetByDate",
+                routeTemplate: "api/{controller}/{date1}/{date2}"
+            );
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
